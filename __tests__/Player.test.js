@@ -34,3 +34,33 @@ test("gets inventory from the player or returns 'false'", () => {
 
     expect(player.getInventory()).toEqual(false);
 })
+
+test("gets players health value", () =>{
+    const player = new Player('Dave');
+
+    expect(player.getHealth()).toEqual(expect.stringContaining(player.health.toString()))
+})
+
+test('check if player is alive or not', () => {
+    const player = new Player('Dave');
+
+    expect(player.isAlive()).toBeTruthy();
+
+    player.health = 0
+
+                //isAlive method ..... a method is a function inside an object
+    expect(player.isAlive()).toBeFalsy();
+})
+
+test("subtract from player's health", () => {
+    const player = new Player('Dave')
+    const oldHealth = player.health;
+
+    player.reduceHealth(5);
+
+    expect(player.health).toBe(oldHealth - 5)
+
+    player.reduceHealth(99999);
+
+    expect(player.health).toBe(0)
+})
